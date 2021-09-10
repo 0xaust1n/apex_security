@@ -1,0 +1,14 @@
+<apex:page>
+  <h1>XSS</h1>
+  <!-- vulnerable -->
+  <apex:outputText escape="false" value="{!$CurrentPage.parameters.userInput}" />
+  <!-- invulnerable -->
+  <apex:outputText>
+    {!$CurrentPage.parameters.userInput}
+  </apex:outputText>
+  <!-- using escape false without vulnerable -->
+  <!-- using HTMLENCODE for Encoding -->
+  <apex:outputText escape="false" value="{!HTMLENCODE($CurrentPage.parameters.userInput)}" />
+  <!-- using JSENCODE for Encoding -->
+  <script>var ret = "{!JSENCODE($CurrentPage.parameters.retURL)}";</script>
+</apex:page>
